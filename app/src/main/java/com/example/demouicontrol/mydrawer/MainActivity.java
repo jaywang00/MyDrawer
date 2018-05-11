@@ -1,5 +1,7 @@
 package com.example.demouicontrol.mydrawer;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.gms.plus.PlusShare;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -41,6 +45,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setItemIconTintList(null);
     }
 
     @Override
@@ -95,14 +100,26 @@ public class MainActivity extends AppCompatActivity
 //
 //        }
 
-        switch (id){
+        switch (id) {
             case R.id.nav_camera:
             case R.id.nav_gallery:
             case R.id.nav_slideshow:
             case R.id.nav_manage:
-            case R.id.nav_share:
+
             case R.id.nav_send:
                 Toast.makeText(this, item.getTitle(), Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.nav_share:
+                // Launch the Google+ share dialog with attribution to your app.
+                Intent shareIntent = new PlusShare.Builder(this)
+                        .setType("text/plain")
+                        .setText("Welcome to the Google+ platform.")
+                        .setContentUrl(Uri.parse("https://developers.google.com/+/"))
+                        .getIntent();
+
+                startActivityForResult(shareIntent, 0);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
