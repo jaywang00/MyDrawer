@@ -55,11 +55,25 @@ public class MainActivity extends AppCompatActivity
         });
 //2. add the lines End ###
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+//3. add this for the menu from right Begin
+// also change the "GravityCompat.START" to "GravityCompat.END"
+// also change int the res\layout\activity_main.xml, from android:layout_gravity="start" to android:layout_gravity="end"
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if (drawer.isDrawerOpen(GravityCompat.END)) {
+                     drawer.closeDrawers();
+                 } else {
+                     drawer.openDrawer(GravityCompat.END);
+                 }
+              }
+         });
+//3. add this for the menu from right End
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -119,8 +133,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+        if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
         } else {
             super.onBackPressed();
         }
@@ -191,7 +205,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 }
