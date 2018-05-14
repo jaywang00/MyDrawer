@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity
 //1.1 add this End #######
 
 //1. add the lines Begin ###  checked google "andriod menu" => find developer android
+//     https://developer.android.com/guide/topics/ui/menus?authuser=1&hl=zh-tw
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
         // Called when the action mode is created; startActionMode() was called
