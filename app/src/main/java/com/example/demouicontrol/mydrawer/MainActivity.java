@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity
         public boolean onCreateActionMode(ActionMode mode, Menu menu) {
             // Inflate a menu resource providing context menu items
             MenuInflater inflater = mode.getMenuInflater();
+// get the menu from menu/main.xml
             inflater.inflate(R.menu.main, menu);
             return true;
         }
@@ -94,7 +95,9 @@ public class MainActivity extends AppCompatActivity
         @Override
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
+// read id from the item in menu/main.xml
                 case R.id.action_settings:
+// change the action to Toast
                     Toast.makeText(MainActivity.this,item.getTitle(), Toast.LENGTH_SHORT).show();
                     mode.finish(); // Action picked, so close the CAB
                     return true;
